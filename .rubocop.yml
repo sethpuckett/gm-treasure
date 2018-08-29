@@ -1,0 +1,18 @@
+Metrics/LineLength:
+  Max: 120
+  IgnoredPatterns: ['(\A|\s)#']
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/AbcSize:
+  Max: 20
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
