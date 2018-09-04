@@ -42,4 +42,3 @@ RSpec.describe DiceInteractor do
     end
   end
 end
-
