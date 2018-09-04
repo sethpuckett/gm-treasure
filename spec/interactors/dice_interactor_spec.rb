@@ -26,7 +26,7 @@ RSpec.describe DiceInteractor do
         'total': 4,
         'values': [4],
         'constant': 0
-      }
+      }.to_json
     end
 
     it 'calls http service' do
