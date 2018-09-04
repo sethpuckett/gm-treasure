@@ -5,7 +5,8 @@ class IndividualTreasureService
     def individual_treasure(challenge_rating:)
       raise ArgumentError, "Invalid challenge rating #{challenge_rating}" unless input_valid?(challenge_rating)
 
-      TreasureHaul.new(cp: 5)
+      total = DiceInteractor.roll(count: 1, sides: 6, constant: 0)
+      TreasureHaul.new(cp: total)
     end
 
     private
