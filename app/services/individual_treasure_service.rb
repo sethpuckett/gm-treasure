@@ -14,5 +14,9 @@ class IndividualTreasureService
     def input_valid?(challenge_rating)
       challenge_rating >= 0
     end
+
+    def treasure_0_to_4
+
+    end
   end
 end
