@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RollTable
   attr_accessor :dice_count, :dice_sides
 
@@ -6,19 +8,21 @@ class RollTable
     @dice_sides = dice_sides
   end
 
+  # rubocop:disable Metrics/ParameterLists
   def add_prospect(min:, max:, type:, count:, sides:, multiplier: 1)
     prospect = {
-      min: params[:min],
-      max: params[:max],
-      type: params[:type],
-      count: params[:count],
-      sides: params[:sides],
-      multiplier: params[:multiplier]
+      min: min,
+      max: max,
+      type: type,
+      count: count,
+      sides: sides,
+      multiplier: multiplier
     }
     raise ArgumentError, 'Invalid prospect' unless input_valid?(prospect)
 
     prospects << prospect
   end
+  # rubocop:enable Metrics/ParameterLists
 
   def prospects
     @prospects ||= []
@@ -27,15 +31,11 @@ class RollTable
   private
 
   def input_valid?(prospect)
-    prospect[:min] > 0 &&
-    prospect[:min] <= 100 &&
-    prospect[:max] > 0 &&
-    prospect[:max] <= 100 &&
-    Constant::valid_treasure_type?(propspect[:type]) &&
-    prospect[:count] > 0 &&
-    prospect[:count] <= 100 &&
-    Constant::valid_dice_sides?(prospect[:sides]) &&
-    prospect[:multiplier] > 0 &&
-    prospect[:multiplier] <= 100
+    prospect[:min].between?(0, 100) &&
+      prospect[:max].between?(0, 100) &&
+      prospect[:count].between?(0, 100) &&
+      prospect[:multiplier].between?(0, 100) &&
+      Constant.valid_treasure_type?(propspect[:type]) &&
+      Constant.valid_dice_sides?(prospect[:sides])
   end
 end

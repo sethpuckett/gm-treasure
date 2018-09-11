@@ -15,8 +15,6 @@ class IndividualTreasureService
       challenge_rating >= 0
     end
 
-    def treasure_0_to_4
-
-    end
+    def treasure_0_to_4; end
   end
 end

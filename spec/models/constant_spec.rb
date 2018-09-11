@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Constant do
-
   describe 'valid_treasure_type?' do
     it 'returns true for valid type' do
       pending 'implement'

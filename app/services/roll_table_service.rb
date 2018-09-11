@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class RollTableService
   class << self
     def evaluate(roll_table)
-      raise ArgumentError, "dice_count must be set" if roll_table.dice_count.blank?
-      raise ArgumentError, "dice_sides must be set" if roll_table.dice_sides.blank?
-      raise ArgumentError, "roll table contains no prospects" if roll_table.prospects.empty?
+      raise ArgumentError, 'dice_count must be set' if roll_table.dice_count.blank?
+      raise ArgumentError, 'dice_sides must be set' if roll_table.dice_sides.blank?
+      raise ArgumentError, 'roll table contains no prospects' if roll_table.prospects.empty?
 
       dice_check = DiceInteractor.roll(count: roll_table.dice_count, sides: roll_table.dice_sides)
       haul = TreasureHaul.new
@@ -21,7 +23,7 @@ class RollTableService
 
   def evaluate_prospect(prospect, dice_check)
     total = 0
-    if (dice_check.between?(prospect.min, prospect.max))
+    if dice_check.between?(prospect.min, prospect.max)
       treasure_roll = DiceInteractor.roll(count: prospect.count, sides: prospect.sides)
       total = treasure_roll * prospect.multiplier
     end

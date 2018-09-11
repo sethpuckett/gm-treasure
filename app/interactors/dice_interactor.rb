@@ -17,7 +17,7 @@ class DiceInteractor
     def input_valid?(count, sides, constant)
       count.between?(1, 100) &&
         constant.between?(-1_000_000, 1_000_000) &&
-        Constant::valid_dice_sides?(sides)
+        Constant.valid_dice_sides?(sides)
     end
 
     def dice_service_url(count, sides, constant)

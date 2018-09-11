@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Constant
   class << self
     def treasure_types
-      [:cp, :sp, :ep, :gp, :pp]
+      %i[cp sp ep gp pp]
     end
 
     def valid_treasure_type?(val)
