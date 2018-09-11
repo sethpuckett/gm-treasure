@@ -26,7 +26,7 @@ class RollTableService
       total = treasure_roll * prospect.multiplier
     end
 
-    { prospect.type: total }
+    { prospect.type => total }
   end
 
   def merge_treasure!(haul, new_treasure)
