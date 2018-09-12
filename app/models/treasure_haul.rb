@@ -12,4 +12,15 @@ class TreasureHaul
     @pp = pp
   end
   # rubocop:enable Naming/UncommunicativeMethodParamName
+
+  def add(type, value)
+    case type
+    when :cp then @cp += value
+    when :sp then @sp += value
+    when :ep then @ep += value
+    when :gp then @gp += value
+    when :pp then @pp += value
+    else raise ArgumentError, "Invalid type '#{type}'"
+    end
+  end
 end

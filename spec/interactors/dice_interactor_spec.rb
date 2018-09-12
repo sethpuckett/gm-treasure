@@ -36,7 +36,7 @@ RSpec.describe DiceInteractor do
 
     it 'returns total value' do
       allow(HTTParty).to receive(:get).and_return(response)
-      total = DiceInteractor.roll(count: 1, sides: 6, constant: 0)
+      total = DiceInteractor.roll(count: 1, sides: 6)
 
       expect(total).to eq(4)
     end

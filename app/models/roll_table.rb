@@ -3,9 +3,11 @@
 class RollTable
   attr_accessor :dice_count, :dice_sides
 
-  def initialize(dice_count: 1, dice_sides: 6)
+  def initialize(dice_count: 1, dice_sides: 100)
     @dice_count = dice_count
     @dice_sides = dice_sides
+
+    raise ArgumentError, 'Invalid initialization' unless initialization_valid?
   end
 
   # rubocop:disable Metrics/ParameterLists
@@ -18,7 +20,7 @@ class RollTable
       sides: sides,
       multiplier: multiplier
     }
-    raise ArgumentError, 'Invalid prospect' unless input_valid?(prospect)
+    raise ArgumentError, 'Invalid prospect' unless prospect_valid?(prospect)
 
     prospects << prospect
   end
@@ -30,12 +32,16 @@ class RollTable
 
   private
 
-  def input_valid?(prospect)
+  def prospect_valid?(prospect)
     prospect[:min].between?(0, 100) &&
       prospect[:max].between?(0, 100) &&
       prospect[:count].between?(0, 100) &&
       prospect[:multiplier].between?(0, 100) &&
-      Constant.valid_treasure_type?(propspect[:type]) &&
+      Constant.valid_treasure_type?(prospect[:type]) &&
       Constant.valid_dice_sides?(prospect[:sides])
+  end
+
+  def initialization_valid?
+    @dice_count.between?(0, 100) && Constant.valid_dice_sides?(@dice_sides)
   end
 end
