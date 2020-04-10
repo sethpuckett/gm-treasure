@@ -3,7 +3,7 @@ default: &default
   encoding: unicode
   host: treasure-db
   username: postgres
-  password:
+  password: postgres
   pool: 5
 
 development:
