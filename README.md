@@ -8,7 +8,7 @@ The Treasure API is used to generate treasure hauls in role playing games. These
 
 ### Query string parameters
 
-- `ce` \[required\]: The challenge rating of the encounter; integer greater than or equal to `0`
+- `cr` \[required\]: The challenge rating of the encounter; integer greater than or equal to `0`
 
 ### Response Attributes
 
