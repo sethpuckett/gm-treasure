@@ -4,7 +4,7 @@ class DiceInteractor
   include HTTParty
 
   class << self
-    def roll(count:, sides:, constant: 0)
+    def roll(count: 1, sides:, constant: 0)
       raise ArgumentError, 'Invalid Roll Input' unless input_valid?(count, sides, constant)
 
       response = HTTParty.get(dice_service_url(count, sides, constant), format: :plain)

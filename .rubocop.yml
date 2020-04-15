@@ -1,6 +1,8 @@
 Layout/LineLength:
   Max: 120
   IgnoredPatterns: ['(\A|\s)#']
+  Exclude:
+    - 'db/seeds.rb'
 
 Style/Documentation:
   Enabled: false
@@ -8,6 +10,7 @@ Style/Documentation:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+    - 'lib/tasks/auto_annotate_models.rake'
 
 Metrics/AbcSize:
   Max: 20
