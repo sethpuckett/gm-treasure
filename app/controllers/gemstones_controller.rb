@@ -15,6 +15,6 @@ class GemstonesController < ApplicationController
   end
 
   def single
-    params[:single] || false
+    (params[:single].present? && params[:single].downcase == 'true') || false
   end
 end

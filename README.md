@@ -41,3 +41,63 @@ The Treasure API is used to generate treasure hauls in role playing games. These
   "pp": 0
 }
 ```
+---
+
+- `GET /gemstones`: Generate a set of gemstones for a treasure hoard
+
+### Notes
+
+- Gems come in denominations of `10 gp`, `50 gp`, `100 gp`, `500 gp`, `1000 gp`, and `5000 gp`
+- The actual value of the returned set of gems will be less than the requested value if there is no combination of gems that can achieve the requested value. E.g. a request with `value = 12` will return a single `10 gp` gem.
+
+### Query string parameters
+
+- `value` \[required\]: The maximum total value of the gemstones; integer greater than `0` and less than `10,000,000`
+- `single`: if 'true ' the set will only contain a single gemstone; `true` or `false`
+
+### Default Parameters
+
+- `single`: `false`
+
+### Response Attributes
+
+- `total_cost_in_gp`: The total cost of all the gems in the set, in gp
+- `gems`: An array of gems
+  - `name`: The name of the gem
+  - `description`: A description of the gem
+  - `cost_in_gp`: The cost of the gem, in gp
+
+### Examples
+
+- max value of 600 gp: `GET /gemstones?value=600`
+```
+{
+  "gems": [
+    {
+      "name": "Black pearl",
+      "description": "opaque pure black",
+      "cost_in_gp": 500
+    },
+    {
+      "name": "Spinel",
+      "description": "transparent red, red-brown, or deep green",
+      "cost_in_gp": 100
+    }
+  ],
+  "total_cost_in_gp": 600
+}
+```
+
+- single gem with max value 600: `GET /gemstones?value=600&single=true
+```
+{
+  "gems": [
+    {
+      "name": "Alexandrite",
+      "description": "transparent dark green",
+      "cost_in_gp": 500
+    }
+  ],
+  "total_cost_in_gp": 500
+}
+```
