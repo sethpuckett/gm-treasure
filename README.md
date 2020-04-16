@@ -88,7 +88,7 @@ The Treasure API is used to generate treasure hauls in role playing games. These
 }
 ```
 
-- single gem with max value 600: `GET /gemstones?value=600&single=true
+- single gem with max value 600: `GET /gemstones?value=600&single=true`
 ```
 {
   "gems": [
