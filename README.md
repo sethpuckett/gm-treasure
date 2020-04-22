@@ -4,6 +4,14 @@ The Treasure API is used to generate treasure hauls in role playing games. These
 
 ## Endpoints
 
+- [Individual Treasure](#individual-treasure)
+- [Gemstones](#gemstones)
+- [Art Objects](#art-objects)
+
+---
+
+## Individual Treasure
+
 - `GET /treasure/individual`: Generate an individual treasure haul
 
 ### Query string parameters
@@ -43,16 +51,18 @@ The Treasure API is used to generate treasure hauls in role playing games. These
 ```
 ---
 
+## Gemstones
+
 - `GET /gemstones`: Generate a set of gemstones for a treasure hoard
 
 ### Notes
 
-- Gems come in denominations of `10 gp`, `50 gp`, `100 gp`, `500 gp`, `1000 gp`, and `5000 gp`
+- Gems come in denominations of `10 gp`, `50 gp`, `100 gp`, `500 gp`, `1,000 gp`, and `5,000 gp`
 - The actual value of the returned set of gems will be less than the requested value if there is no combination of gems that can achieve the requested value. E.g. a request with `value = 12` will return a single `10 gp` gem.
 
 ### Query string parameters
 
-- `value` \[required\]: The maximum total value of the gemstones; integer greater than `0` and less than `10,000,000`
+- `value` \[required\]: The maximum total value of the gemstones; integer greater than or equal to `10` and less than `10,000,000`
 - `single`: if 'true ' the set will only contain a single gemstone; `true` or `false`
 
 ### Default Parameters
@@ -99,5 +109,64 @@ The Treasure API is used to generate treasure hauls in role playing games. These
     }
   ],
   "total_cost_in_gp": 500
+}
+```
+
+---
+
+## Art Objects
+
+- `GET /art_objects`: Generate a set of art objects for a treasure hoard
+
+### Notes
+
+- Art objects come in denominations of `25 gp`, `250 gp`, `750 gp`, `2,500 gp`, and `7,500 gp`.
+- The actual value of the returned set of art objects will be less than the requested value if there is no combination of objects that can achieve the requested value. E.g. a request with `value = 30` will return a single `25 gp` object.
+
+### Query string parameters
+
+- `value` \[required\]: The maximum total value of the art objects; integer greater than or equal to `25` and less than `10,000,000`
+- `single`: if 'true ' the set will only contain a single art object; `true` or `false`
+
+### Default Parameters
+
+- `single`: `false`
+
+### Response Attributes
+
+- `total_cost_in_gp`: The total cost of all the art objects in the set, in gp
+- `art_objects`: An array of art objects
+  - `name`: The name of the art object
+  - `cost_in_gp`: The cost of the art objects, in gp
+
+### Examples
+
+- max value of 1,000 gp: `GET /art_objects?value=1000`
+```
+{
+  "art_objects": [
+    {
+      "name": "Obsidian statuette with gold fittings and inlay",
+      "cost_in_gp": 750
+    },
+    {
+      "name": "Box of turquoise animal figurines",
+      "cost_in_gp": 250
+    }
+  ],
+  "total_cost_in_gp": 1000
+}
+```
+
+- single art object with max value 10,000: `GET /art_objects?value=100000&single=true`
+```
+{
+  "art_objects": [
+    {
+      "name": "Gold cup set with emeralds",
+      "cost_in_gp": 7500
+    }
+  ],
+  "total_cost_in_gp": 7500
 }
 ```
